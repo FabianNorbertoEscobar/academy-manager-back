@@ -2,6 +2,18 @@
 
 Backend API for Academy Manager application built with Express.js.
 
+## 🌐 Production
+
+**API Base URL:** https://academy-manager-back.vercel.app
+
+### Live Endpoints
+
+Try these endpoints to see the data:
+
+- **Students:** https://academy-manager-back.vercel.app/api/students
+- **Courses:** https://academy-manager-back.vercel.app/api/courses
+- **Users:** https://academy-manager-back.vercel.app/api/users
+
 ## 🚀 Local Development
 
 1. Install dependencies:
