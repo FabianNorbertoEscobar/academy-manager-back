@@ -5,11 +5,13 @@ Backend API for Academy Manager application built with Express.js.
 ## 🚀 Local Development
 
 1. Install dependencies:
+
 ```bash
 npm install
 ```
 
 2. Start the server:
+
 ```bash
 npm start
 ```
@@ -21,6 +23,7 @@ The API will be available at `http://localhost:3000`
 All endpoints are prefixed with `/api`:
 
 ### Users
+
 - `GET /api/users` - Get all users
 - `GET /api/users/:id` - Get user by ID
 - `POST /api/users` - Create new user
@@ -28,6 +31,7 @@ All endpoints are prefixed with `/api`:
 - `DELETE /api/users/:id` - Delete user
 
 ### Courses
+
 - `GET /api/courses` - Get all courses
 - `GET /api/courses/:id` - Get course by ID
 - `POST /api/courses` - Create new course
@@ -35,6 +39,7 @@ All endpoints are prefixed with `/api`:
 - `DELETE /api/courses/:id` - Delete course
 
 ### Students
+
 - `GET /api/students` - Get all students
 - `GET /api/students/:id` - Get student by ID
 - `POST /api/students` - Create new student
@@ -44,16 +49,19 @@ All endpoints are prefixed with `/api`:
 ## 🌐 Deploy to Vercel
 
 1. Install Vercel CLI:
+
 ```bash
 npm install -g vercel
 ```
 
 2. Deploy:
+
 ```bash
 vercel
 ```
 
 3. For production deployment:
+
 ```bash
 vercel --prod
 ```
