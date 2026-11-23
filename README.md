@@ -1,85 +1,109 @@
-# Academy Manager Backend
+# Academy Manager API
 
-Backend API for Academy Manager application built with Express.js.
+API REST de ejemplo para gestionar una academia. El proyecto sirve como backend para una aplicación de gestión de usuarios, cursos y estudiantes.
 
-## 🌐 Production
+## Stack y tecnologías
 
-**API Base URL:** https://academy-manager-back.vercel.app
+- **Node.js**: entorno de ejecución de JavaScript en el servidor.
+- **JavaScript (CommonJS)**: lenguaje y sistema de módulos (`require` / `module.exports`).
+- **Express 4**: servidor HTTP y definición de rutas.
+- **CORS**: middleware para permitir solicitudes desde otros orígenes.
+- **JSON**: formato de entrada y salida de la API.
+- **Vercel**: plataforma de despliegue; la configuración está en `vercel.json`.
 
-### Live Endpoints
+## Funcionalidades
 
-Try these endpoints to see the data:
+- Operaciones CRUD para usuarios, cursos y estudiantes.
+- Consulta de una colección completa o de un elemento por su identificador.
+- Respuestas JSON y códigos HTTP como `201`, `204` y `404`.
+- Datos de ejemplo cargados en memoria al iniciar la aplicación.
+- Endpoint raíz para consultar los recursos disponibles.
 
-- **Students:** https://academy-manager-back.vercel.app/api/students
-- **Courses:** https://academy-manager-back.vercel.app/api/courses
-- **Users:** https://academy-manager-back.vercel.app/api/users
+## Conceptos del curso aplicados
 
-## 🚀 Local Development
+Este proyecto pone en práctica conceptos habituales de desarrollo backend:
 
-1. Install dependencies:
+- Construcción de una API REST y diseño de endpoints con métodos HTTP.
+- Creación de un servidor y organización de rutas con Express.
+- Uso de middleware para procesar JSON y habilitar CORS.
+- Lectura de parámetros de ruta (`:id`) y manejo de respuestas y errores HTTP.
+- Operaciones CRUD sobre colecciones de datos.
+- Uso de variables de entorno, dependencias de npm y despliegue en la nube.
+
+## Requisitos
+
+- Node.js y npm instalados.
+
+## Ejecución local
 
 ```bash
 npm install
-```
-
-2. Start the server:
-
-```bash
 npm start
 ```
 
-The API will be available at `http://localhost:3000`
+El servidor escucha en `http://localhost:3000` de forma predeterminada. Se puede cambiar el puerto definiendo la variable de entorno `PORT`.
 
-## 📡 API Endpoints
+Para iniciar el servidor en desarrollo también está disponible `npm run dev`.
 
-All endpoints are prefixed with `/api`:
+## API
 
-### Users
+Todos los recursos usan el prefijo `/api`. La API desplegada está disponible en `https://academy-manager-back.vercel.app`.
 
-- `GET /api/users` - Get all users
-- `GET /api/users/:id` - Get user by ID
-- `POST /api/users` - Create new user
-- `PUT /api/users/:id` - Update user
-- `DELETE /api/users/:id` - Delete user
+| Recurso | Listar | Consultar por ID | Crear | Actualizar | Eliminar |
+| --- | --- | --- | --- | --- | --- |
+| Usuarios | `GET /api/users` | `GET /api/users/:id` | `POST /api/users` | `PUT /api/users/:id` | `DELETE /api/users/:id` |
+| Cursos | `GET /api/courses` | `GET /api/courses/:id` | `POST /api/courses` | `PUT /api/courses/:id` | `DELETE /api/courses/:id` |
+| Estudiantes | `GET /api/students` | `GET /api/students/:id` | `POST /api/students` | `PUT /api/students/:id` | `DELETE /api/students/:id` |
 
-### Courses
+El endpoint `GET /` devuelve un mensaje y las rutas principales. Las consultas por un ID inexistente responden `404`; las creaciones responden `201` y las eliminaciones exitosas, `204`.
 
-- `GET /api/courses` - Get all courses
-- `GET /api/courses/:id` - Get course by ID
-- `POST /api/courses` - Create new course
-- `PUT /api/courses/:id` - Update course
-- `DELETE /api/courses/:id` - Delete course
+### Modelos de datos de ejemplo
 
-### Students
+- **Usuario**: `id`, `username`, `email`, `password`, `role`.
+- **Curso**: `id`, `title`, `description`, `beginDate`, `endDate`, `status`.
+- **Estudiante**: `id`, `firstName`, `lastName`, `gender`, `birthDate`, `email`, `photoUrl`.
 
-- `GET /api/students` - Get all students
-- `GET /api/students/:id` - Get student by ID
-- `POST /api/students` - Create new student
-- `PUT /api/students/:id` - Update student
-- `DELETE /api/students/:id` - Delete student
+Los valores admitidos de `role`, `status` y `gender` pueden consultarse en los datos de ejemplo de `index.js`.
 
-## 🌐 Deploy to Vercel
+### Ejemplos
 
-1. Install Vercel CLI:
+```bash
+# Listar cursos
+curl https://academy-manager-back.vercel.app/api/courses
+
+# Consultar un estudiante
+curl http://localhost:3000/api/students/1
+
+# Crear un curso
+curl -X POST http://localhost:3000/api/courses \
+  -H "Content-Type: application/json" \
+  -d '{
+    "id": "11",
+    "title": "Guitarra",
+    "description": "Introducción al instrumento",
+    "beginDate": "2025-09-01",
+    "endDate": "2025-12-01",
+    "status": "SCHEDULED"
+  }'
+```
+
+Para actualizar, `PUT` reemplaza el elemento con el cuerpo JSON enviado. Las operaciones de escritura modifican únicamente los datos en memoria del proceso.
+
+## Despliegue en Vercel
+
+Con la CLI de Vercel instalada, ejecuta:
 
 ```bash
 npm install -g vercel
-```
-
-2. Deploy:
-
-```bash
 vercel
 ```
 
-3. For production deployment:
+Para desplegar a producción:
 
 ```bash
 vercel --prod
 ```
 
-## ⚠️ Important Notes
+## Alcance y limitaciones
 
-- Data is stored in memory and will reset on each deployment
-- CORS is enabled for all origins
-- Perfect for demos and academic projects
+Este backend está pensado para aprendizaje y demostración: no utiliza una base de datos, por lo que los datos no son persistentes y pueden reiniciarse al detener o volver a desplegar la aplicación. Tampoco implementa autenticación, autorización ni validación de datos. CORS está habilitado para todos los orígenes; antes de usarlo en producción, estas capacidades y la configuración de seguridad deben revisarse.
